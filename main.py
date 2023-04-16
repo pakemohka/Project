@@ -1,0 +1,316 @@
+
+import unittest
+from lol import *
+class My_Test(unittes.TestCase):
+def test_args(self):
+ self.assertEqual(adder(2, 2), 4)
+ logging.basicConfig(level=logging.DEBUG,
+                    filename="logs.log", filemode="a",
+                    format="We have next logging message: "
+                    "%(asctime)s:%(levelname)s-%(message)s")
+
+logging.basicConfig(level=logging.DEBUG)
+logging.debug("debug")
+logging.info("info")
+logging.warning("warning")
+logging.error("error")
+logging.critical("critical")
+try:
+   print(10/0)
+except Exception:
+   logging.exception("Exception")
+
+assert 2+2 == 5, "wrong assert uslovie nepravilno"
+
+def adder(*args, **kwargs):
+    result = 0
+    for _ in args:
+        if type(_) == int or type(_) == bool or type(_) == float:
+            result += _
+        else:
+            try:
+                result += float(_)
+                continue
+            except (ValueError, TypeError):
+                pass
+            try:
+                result += int(_)
+                continue
+            except (ValueError, TypeError):
+    for _ in kwargs.values():
+        if type(_) == int or type(_) == bool or type(_) == float:
+             result += _
+        else:
+            try:
+             result += float(_)
+             continue
+           except (ValueError, TypeError):
+               pass
+            try:
+             result += int(_)
+             continue
+           except (ValueError, TypeError):
+               pass
+    return result
+class My_Test(unittest.TestCase):
+    def test_args(self):
+        import logging
+        import random
+
+        class Human:
+            def __init__(self, name="Human", job=None, home=None, car=None, zoo=None, ):
+                self.name = name
+                self.money = 100
+                self.gladness = 50
+                self.satiety = 50
+                self.job = job
+                self.car = car
+                self.home = home
+                self.zoo = zoo
+
+            def get_home(self):
+                self.home = House()
+
+            def get_zoo(self):
+                self.zoo = Zoo(breed_of_zoo)
+
+            def get_car(self):
+                self.car = Auto(brands_of_car)
+
+            def get_job(self):
+                if self.car.drive():
+                    pass
+                else:
+                    self.to_repair()
+                    return
+                self.job = Job(job_list)
+
+            def eat(self):
+                if self.home.food <= 0:
+                    self.shopping("food")
+                else:
+                    if self.satiety >= 100:
+                        self.satiety = 100
+                        return
+                    self.satiety += 5
+                    self.home.food -= 5
+
+            def work(self):
+                if self.car.drive():
+                    pass
+                else:
+                    if self.car.fuel < 20:
+                        self.shopping("fuel")
+                        return
+                    if self.zoo.gladness < 25:
+                        self.shopping("food")
+                        return
+                    else:
+                        self.to_repair()
+                        return
+                self.money += self.job.salary
+                self.gladness -= self.job.gladness_less
+                self.satiety -= 4
+
+            def shopping(self, manage):
+                if self.car.drive():
+                    pass
+                else:
+                    if self.car.fuel < 20:
+                        manage = "fuel"
+                    else:
+                        self.to_repair()
+                        return
+                if manage == "fuel":
+                    print("I bought fuel")
+                    self.money -= 100
+                    self.car.fuel += 100
+                else:
+                    if self.zoo.food < 25:
+                        manage = "food"
+                    else:
+                        self.to_gladness()
+                        return
+                if manage == "food":
+                    print("I gladness pet")
+                    self.money -= 50
+                    self.zoo.gladness += 80
+                elif manage == "food":
+                    print("Bought food")
+                    self.money -= 50
+                    self.home.food += 50
+                elif manage == "delicacies":
+                    print("Hooray! Delicious!")
+                    self.gladness += 10
+                    self.satiety += 2
+                    self.money -= 15
+
+            def chill(self):
+                self.gladness += 10
+                self.home.mess += 5
+
+            def clean_home(self):
+                self.gladness -= 5
+                self.home.mess = 0
+
+            def to_repair(self):
+                self.car.strength += 100
+                self.money -= 50
+
+            def to_gladnesszoo(self):
+                self.zoo.strength += 100
+                self.money -= 50
+
+            def days_indexes(self, day):
+                day = f" Today the {day} of {self.name}'s life "
+                print(f"{day:=^50}", "\n")
+                human_indexes = self.name + "'s indexes"
+                print(f"{human_indexes:^50}", "\n")
+                print(f"Money – {self.money}")
+                print(f"Satiety – {self.satiety}")
+                print(f"Gladness – {self.gladness}")
+                home_indexes = "Home indexes"
+                print(f"{home_indexes:^50}", "\n")
+                print(f"Food – {self.home.food}")
+                print(f"Mess – {self.home.mess}")
+                car_indexes = f"{self.car.brand} car indexes"
+                print(f"{car_indexes:^50}", "\n")
+                print(f"Fuel – {self.car.fuel}")
+                print(f"Strength – {self.car.strength}")
+                zoo_indexes = f"{self.zoo.breed} zoo indexes"
+                print(f"{zoo_indexes:^50}", "\n")
+                print(f"Fuel – {self.zoo.gladness}")
+                print(f"Strength – {self.zoo.strength}")
+
+            def is_alive(self):
+                if self.gladness < 0:
+                    print("Depression…")
+                    return False
+                if self.satiety < 0:
+                    print("Dead…")
+                    return False
+                if self.money < -500:
+                    print("Bankrupt…")
+                    return False
+
+            def live(self, day):
+                if self.is_alive() == False:
+                    return False
+                if self.home is None:
+                    print("Settled in the house")
+                    self.get_home()
+                if self.car is None:
+                    self.get_car()
+                    print(f"I bought a car{self.car.brand}")
+                if self.zoo is None:
+                    self.get_zoo()
+                    print(f"I bought a zoo{self.zoo.breed}")
+                if self.job is None:
+                    self.get_job()
+                    print(f"I don't have a job, I'm going to get a job "
+                          f"{self.job.job} with salary {self.job.salary}")
+                self.days_indexes(day)
+                dice = random.randint(1, 4)
+                if self.satiety < 20:
+                    print("I'll go eat")
+                    self.eat()
+                elif self.gladness < 20:
+                    if self.home.mess > 15:
+                        print("I want to chill, but there is so much mess…")
+                        print("So I will clean the house")
+                        self.clean_home()
+                    else:
+                        print("Let`s chill!")
+                        self.chill()
+                elif self.money < 0:
+                    print("Start working")
+                    self.work()
+                elif self.car.strength < 15:
+                    print("I need to repair my car")
+                    self.to_repair()
+                elif self.zoo.strength < 25:
+                    print("I need to feed my pet")
+                    self.to_gladnesszoo()
+                elif dice == 1:
+                    print("Let`s chill!")
+                    self.chill()
+                elif dice == 2:
+                    print("Start working")
+                    self.work()
+                elif dice == 3:
+                    print("Cleaning time!")
+                    self.clean_home()
+                elif dice == 4:
+                    print("Time for treats!")
+                    self.shopping(manage="delicacies")
+
+        brands_of_car = {
+            "BMW": {"fuel": 100, "strength": 100, "consumption": 6},
+            "Lada": {"fuel": 50, "strength": 40, "consumption": 10},
+            "Volvo": {"fuel": 70, "strength": 150, "consumption": 8},
+            "Ferrari": {"fuel": 80, "strength": 120, "consumption": 14}}
+
+        breed_of_zoo = {
+            "Cat": {"gladness": 90, "strength": 100, "consumption": 6},
+            "Dog": {"gladness": 100, "strength": 40, "consumption": 10},
+            "Parrot": {"gladness": 50, "strength": 150, "consumption": 8},
+            "Rabbit": {"gladness": 80, "strength": 120, "consumption": 14}}
+
+        class Auto:
+            def __init__(self, brand_list):
+                self.brand = random.choice(list(brand_list))
+                self.fuel = brand_list[self.brand]["fuel"]
+                self.strength = brand_list[self.brand]["strength"]
+                self.consumption = brand_list[self.brand]["consumption"]
+
+            def drive(self):
+                if self.strength > 0 and self.fuel >= self.consumption:
+                    self.fuel -= self.consumption
+                    self.strength -= 1
+                    return True
+                else:
+                    print("The car cannot move")
+                    return False
+
+        class Zoo:
+            def __init__(self, breed_list):
+                self.breed = random.choice(list(breed_list))
+                self.gladness = breed_list[self.breed]["gladness"]
+                self.strength = breed_list[self.breed]["strength"]
+                self.consumption = breed_list[self.breed]["consumption"]
+
+            def gladnesszoo(self):
+                if self.strength > 0 and self.gladness >= self.consumption:
+                    self.gladness -= self.consumption
+                    self.strength -= 1
+                    return True
+                else:
+                    print("pet dies")
+                    return False
+
+        class House:
+            def __init__(self):
+                self.mess = 0
+                self.food = 0
+
+        job_list = {
+            "Java developer":
+                {"salary": 50, "gladness_less": 10},
+            "Python developer":
+                {"salary": 40, "gladness_less": 3},
+            "C++ developer":
+                {"salary": 45, "gladness_less": 25},
+            "Rust developer":
+                {"salary": 70, "gladness_less": 1},
+        }
+
+        class Job:
+            def __init__(self, job_list):
+                self.job = random.choice(list(job_list))
+                self.salary = job_list[self.job]["salary"]
+                self.gladness_less = job_list[self.job]["gladness_less"]
+
+        nick = Human(name="Nick")
+        for day in range(1, 800):
+            if nick.live(day) == False:
+                break
